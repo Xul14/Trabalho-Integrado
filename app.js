@@ -103,7 +103,7 @@ app.get('/v1/lion-school/alunos/curso/:curso', cors(), async function (request, 
     if (siglaCurso == '' || siglaCurso == undefined || !isNaN(siglaCurso)) {
 
         statusCode = 400
-        dadosCursoSigla.message = 'Não foi possível processar pois os dados de entrada que foi enviado não corresponde ao exigido, confira o valor pois não pode ser vazio, precisa ser um caractere e ter dois dígitos'
+        dadosCursoSigla.message = 'Não foi possível processar pois os dados de entrada que foi enviado não corresponde ao exigido.'
 
     } else {
         let cursoSigla = jsonDados.getAlunosCurso(siglaCurso)
