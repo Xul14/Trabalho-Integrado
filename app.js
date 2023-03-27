@@ -94,8 +94,8 @@ app.get('/v1/lion-school/alunos/:numeroMatricula', cors(), async function(reques
 })
 
 //EndPoint da função getAlunosCurso que filtra os alunos de acordo com seu curso
-app.get('/v1/lion-school/alunos/curso/:curso', cors(), async function(request, response, next) {
-    let siglaCurso = request.params.curso
+app.get('/v1/lion-school/alunoss', cors(), async function(request, response, next) {
+    let siglaCurso = request.query.curso
     let statusCode
     let dadosCursoSigla = {}
 
@@ -122,8 +122,8 @@ app.get('/v1/lion-school/alunos/curso/:curso', cors(), async function(request, r
 })
 
 //EndPoint da função getStatusAluno que filtra o status do aluno
-app.get('/v1/lion-school/alunos/status/:status', cors(), async function(request, response, next) {
-    let statusAluno = request.params.status
+app.get('/v1/lion-school/alunosss', cors(), async function(request, response, next) {
+    let statusAluno = request.query.status
     let statusCode
     let dadosAlunoStatus = {}
 

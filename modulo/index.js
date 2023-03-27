@@ -151,10 +151,10 @@ const getStatusAlunos = (function(statusAluno) {
 
 })
 
-let teste = 'sistemas operacionais'
+// let teste = 'sistemas operacionais'
 
-let resultado = teste.substring(21, 3)
-console.log(resultado)
+// let resultado = teste.substring(21, 3)
+// console.log(resultado)
 
 
 // console.log(getNomeCursos())
