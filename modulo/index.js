@@ -104,8 +104,13 @@ const getAlunosCurso = (function(nomeCurso) {
         curso.curso.forEach(nomeDoCurso => {
 
             if (nomeDoCurso.sigla.toUpperCase() == nomeCurso.toUpperCase()) {
+                let jsonAlunos = {}
 
-                arrayAlunosCurso.push(curso)
+                jsonAlunos.foto = curso.foto
+                jsonAlunos.nome = curso.nome
+                jsonAlunos.curso = curso.curso[0].nome
+
+                arrayAlunosCurso.push(jsonAlunos)
                 status = true
             }
         })
@@ -160,7 +165,7 @@ const getStatusAlunos = (function(statusAluno) {
 // console.log(getNomeCursos())
 // console.log(getListaAlunos())
 // console.log(getMatriculaAlunos('20151001001'))
-// console.log(getAlunosCurso('rds'))
+// console.log(getAlunosCurso('ds'))
 // console.log(getStatusAlunos('cursando'))
 
 module.exports = {
