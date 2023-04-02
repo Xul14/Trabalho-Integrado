@@ -51,7 +51,6 @@ app.get('/v1/lion-school/cursos', cors(), async function (request, response, nex
 
 //EndPoint da função getListaAlunos que lista todos os alunos da escola
 app.get('/v1/lion-school/alunos', cors(), async function (request, response, next) {
-    // let alunos = jsonDados.getListaAlunos()
     let getFuncao
     let curso = request.query.curso
     let status = request.query.status
@@ -60,7 +59,7 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
 
     if (status != undefined && curso == undefined) {
 
-        if (isNaN(status)) {
+        if (status != '' || isNaN(status)) {
             getFuncao = jsonDados.getStatusAlunos(status)
             statusCode = 200
             dadosAlunos = getFuncao
@@ -70,7 +69,7 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
 
     } else if (curso != undefined && status == undefined) {
 
-        if (isNaN(curso)) {
+        if (curso != '' || isNaN(curso)) {
             getFuncao = jsonDados.getAlunosCurso(curso)
             statusCode = 200
             dadosAlunos = getFuncao
@@ -121,60 +120,7 @@ app.get('/v1/lion-school/alunos/:numeroMatricula', cors(), async function (reque
 
 })
 
-//EndPoint da função getAlunosCurso que filtra os alunos de acordo com seu curso
-// app.get('/v1/lion-school/alunoss', cors(), async function (request, response, next) {
-//     let siglaCurso = request.query.curso
-//     let statusCode
-//     let dadosCursoSigla = {}
 
-
-//     if (siglaCurso == '' || siglaCurso == undefined || !isNaN(siglaCurso)) {
-
-//         statusCode = 400
-//         dadosCursoSigla.message = 'Não foi possível processar pois os dados de entrada que foi enviado não corresponde ao exigido.'
-
-//     } else {
-//         let cursoSigla = jsonDados.getAlunosCurso(siglaCurso)
-
-//         if (cursoSigla) {
-//             statusCode = 200
-//             dadosCursoSigla = cursoSigla
-//         } else {
-//             statusCode = 404
-//         }
-//     }
-
-//     response.status(statusCode)
-//     response.json(dadosCursoSigla)
-
-// })
-
-//EndPoint da função getStatusAluno que filtra o status do aluno
-// app.get('/v1/lion-school/alunosss', cors(), async function (request, response, next) {
-//     let statusAluno = request.query.status
-//     let statusCode
-//     let dadosAlunoStatus = {}
-
-//     if (statusAluno == '' || statusAluno == undefined || !isNaN(statusAluno)) {
-//         statusCode = 400
-//         dadosAlunoStatus.message = 'Não foi possível processar pois os dados de entrada que foi enviado não corresponde ao exigido.'
-
-//     } else {
-//         let status = jsonDados.getStatusAlunos(statusAluno)
-
-//         if (status) {
-//             statusCode = 200
-//             dadosAlunoStatus = status
-//         } else {
-//             statusCode = 404
-//         }
-//     }
-
-//     response.status(statusCode)
-//     response.json(dadosAlunoStatus)
-
-
-// })
 
 
 app.listen(8080, function () {

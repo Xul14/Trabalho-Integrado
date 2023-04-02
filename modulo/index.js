@@ -49,6 +49,7 @@ const getListaAlunos = (function() {
         jsonAluno.matricula = aluno.matricula
         jsonAluno.sexo = aluno.sexo
         jsonAluno.curso = aluno.curso[0].nome
+        jsonAluno.conclusao = aluno.curso[0].conclusao
         jsonAluno.status = aluno.status
 
         arrayAlunos.push(jsonAluno)
@@ -78,6 +79,7 @@ const getMatriculaAlunos = (function(matricula) {
             jsonMatricula.matricula = aluno.matricula
             jsonMatricula.sexo = aluno.sexo
             jsonMatricula.curso = aluno.curso[0].nome
+            jsonMatricula.conclusao = aluno.curso[0].conclusao
             jsonMatricula.status = aluno.status
             status = true
         }
@@ -109,6 +111,9 @@ const getAlunosCurso = (function(nomeCurso) {
                 jsonAlunos.foto = curso.foto
                 jsonAlunos.nome = curso.nome
                 jsonAlunos.curso = curso.curso[0].nome
+                jsonAlunos.conclusao = curso.curso[0].conclusao
+                jsonAlunos.status = curso.status
+                jsonAlunos.matricula = curso.matricula
 
                 arrayAlunosCurso.push(jsonAlunos)
                 status = true
@@ -139,6 +144,7 @@ const getStatusAlunos = (function(statusAluno) {
             jsonStatusAluno.nome = aluno.nome
             jsonStatusAluno.matricula = aluno.matricula
             jsonStatusAluno.curso = aluno.curso[0].nome
+            jsonStatusAluno.conclusao = aluno.curso[0].conclusao
             jsonStatusAluno.status = aluno.status
 
             arrayStatus.push(jsonStatusAluno)
@@ -156,22 +162,26 @@ const getStatusAlunos = (function(statusAluno) {
 
 })
 
-// let teste = 'sistemas operacionais'
-
-// let resultado = teste.substring(21, 3)
-// console.log(resultado)
-
+// Função que retorna as siglas de cada materia
+const getSiglaMaterias = (nomeMateria) => {
+    const materia = nomeMateria.split(' ');
+    const siglaMateria = materia.map(materia => materia.charAt(0).toUpperCase());
+    return siglaMateria.join('')
+}
 
 // console.log(getNomeCursos())
 // console.log(getListaAlunos())
 // console.log(getMatriculaAlunos('20151001001'))
 // console.log(getAlunosCurso('ds'))
 // console.log(getStatusAlunos('cursando'))
+// console.log(getSiglaMaterias('Programação Web Back End'))
+
 
 module.exports = {
     getNomeCursos,
     getListaAlunos,
     getMatriculaAlunos,
     getAlunosCurso,
-    getStatusAlunos
+    getStatusAlunos, 
+    getSiglaMaterias
 }
