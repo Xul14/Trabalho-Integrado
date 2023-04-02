@@ -31,6 +31,11 @@ app.use((request, response, next) => {
 
 //EndPoints
 
+//EndPoint para teste de deploy
+app.get("/", (req, res) => {
+    return res.json("hello world");
+  })
+
 //EndPoint da função getNomeCursos que lista os cursos
 app.get('/v1/lion-school/cursos', cors(), async function (request, response, next) {
     let cursos = jsonDados.getNomeCursos()
@@ -120,9 +125,9 @@ app.get('/v1/lion-school/alunos/:numeroMatricula', cors(), async function (reque
 
 })
 
+const port = process.env.PORT || 8080;
 
 
-
-app.listen(8080, function () {
-    console.log('Servidor aguardando requisições na porta 8080.')
+app.listen(port, function () {
+    console.log(`Servidor aguardando requisições na porta ${port}`)
 })
