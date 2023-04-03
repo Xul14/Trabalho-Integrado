@@ -78,7 +78,7 @@ const getMatriculaAlunos = (function(matricula) {
             jsonMatricula.nome = aluno.nome
             jsonMatricula.matricula = aluno.matricula
             jsonMatricula.sexo = aluno.sexo
-            jsonMatricula.curso = aluno.curso[0].nome
+            jsonMatricula.curso = aluno.curso
             jsonMatricula.conclusao = aluno.curso[0].conclusao
             jsonMatricula.status = aluno.status
             status = true
@@ -182,6 +182,6 @@ module.exports = {
     getListaAlunos,
     getMatriculaAlunos,
     getAlunosCurso,
-    getStatusAlunos, 
+    getStatusAlunos,
     getSiglaMaterias
 }
