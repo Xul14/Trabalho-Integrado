@@ -50,6 +50,7 @@ const getListaAlunos = (function() {
         jsonAluno.sexo = aluno.sexo
         jsonAluno.curso = aluno.curso[0].nome
         jsonAluno.conclusao = aluno.curso[0].conclusao
+        jsonAluno.conclusao = aluno.curso[0].disciplinas
         jsonAluno.status = aluno.status
 
         arrayAlunos.push(jsonAluno)
@@ -130,16 +131,18 @@ const getAlunosCurso = (function(nomeCurso) {
 })
 
 //Função que retorna o status dos alunos
-const getStatusAlunos = (function(statusAluno) {
+const getStatusAlunos = (function(statusAluno, jsonListaAlunos) {
     let jsonStatus = {}
     let arrayStatus = []
     let status = false
 
     jsonStatus.status = arrayStatus
+    
+    jsonListaAlunos.alunos.forEach(aluno => {
 
-    alunos.alunos.forEach(aluno => {
         if (aluno.status.toUpperCase() == statusAluno.toUpperCase()) {
             let jsonStatusAluno = {}
+            
             jsonStatusAluno.foto = aluno.foto
             jsonStatusAluno.nome = aluno.nome
             jsonStatusAluno.matricula = aluno.matricula
