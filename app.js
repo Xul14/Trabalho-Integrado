@@ -90,9 +90,7 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
 
         if(isNaN(curso) && isNaN(status)){
             let alunosCurso = jsonDados.getAlunosCurso(curso)
-            console.log(alunosCurso);
             getFuncao = jsonDados.getStatusAlunos(status, alunosCurso.curso)
-            console.log(getFuncao);
             statusCode = 200
             dadosAlunos = getFuncao
         }else{
