@@ -8,7 +8,7 @@ var cursos = require('./cursos.js')
 var alunos = require('./alunos.js')
 
 //Função que retorna a lista de cursos
-const getNomeCursos = (function() {
+const getNomeCursos = (function () {
     let jsonCursos = {}
     let arrayCursos = []
     let status = false
@@ -33,7 +33,7 @@ const getNomeCursos = (function() {
 })
 
 //Função que retorna a lista de alunos
-const getListaAlunos = (function() {
+const getListaAlunos = (function () {
     let jsonListaAlunos = {}
     let arrayAlunos = []
     let status = false
@@ -66,8 +66,16 @@ const getListaAlunos = (function() {
 
 })
 
+
+// Função que retorna as siglas de cada materia
+const getSiglaMaterias = (nomeMateria) => {
+    const materia = nomeMateria.split(' ')
+    const siglaMateria = materia.map(materia => materia.charAt(0).toUpperCase());
+    return siglaMateria.join('')
+}
+
 //Função que retorna os dados dos alunos pelo número de matrícula
-const getMatriculaAlunos = (function(matricula) {
+const getMatriculaAlunos = (function (matricula) {
     let jsonMatricula = {}
     let status = false
 
@@ -75,13 +83,10 @@ const getMatriculaAlunos = (function(matricula) {
 
         if (aluno.matricula == matricula) {
 
-            jsonMatricula.foto = aluno.foto
-            jsonMatricula.nome = aluno.nome
-            jsonMatricula.matricula = aluno.matricula
-            jsonMatricula.sexo = aluno.sexo
-            jsonMatricula.curso = aluno.curso
-            jsonMatricula.conclusao = aluno.curso[0].conclusao
-            jsonMatricula.status = aluno.status
+            jsonMatricula.aluno = aluno
+            aluno.curso[0].disciplinas.forEach(disciplina => {
+                disciplina.sigla = getSiglaMaterias(disciplina.nome)
+            })
             status = true
         }
     })
@@ -95,7 +100,7 @@ const getMatriculaAlunos = (function(matricula) {
 })
 
 //Função que retorna uma lista de todos os alunos matriculados no curso especificado
-const getAlunosCurso = (function(nomeCurso) {
+const getAlunosCurso = (function (nomeCurso) {
     let jsonAlunosCurso = {}
     let arrayAlunosCurso = []
     let status = false
@@ -131,24 +136,18 @@ const getAlunosCurso = (function(nomeCurso) {
 })
 
 //Função que retorna o status dos alunos
-const getStatusAlunos = (function(statusAluno, jsonListaAlunos) {
+const getStatusAlunos = (function (statusAluno, jsonAlunosCurso) {
     let jsonStatus = {}
     let arrayStatus = []
     let status = false
 
     jsonStatus.status = arrayStatus
-    
-    jsonListaAlunos.alunos.forEach(aluno => {
+
+    jsonAlunosCurso.forEach(aluno => {
+        let jsonStatusAluno = {}
 
         if (aluno.status.toUpperCase() == statusAluno.toUpperCase()) {
-            let jsonStatusAluno = {}
-            
-            jsonStatusAluno.foto = aluno.foto
-            jsonStatusAluno.nome = aluno.nome
-            jsonStatusAluno.matricula = aluno.matricula
-            jsonStatusAluno.curso = aluno.curso[0].nome
-            jsonStatusAluno.conclusao = aluno.curso[0].conclusao
-            jsonStatusAluno.status = aluno.status
+            jsonStatusAluno = aluno
 
             arrayStatus.push(jsonStatusAluno)
             status = true
@@ -165,18 +164,11 @@ const getStatusAlunos = (function(statusAluno, jsonListaAlunos) {
 
 })
 
-// Função que retorna as siglas de cada materia
-const getSiglaMaterias = (nomeMateria) => {
-    const materia = nomeMateria.split(' ');
-    const siglaMateria = materia.map(materia => materia.charAt(0).toUpperCase());
-    return siglaMateria.join('')
-}
-
 // console.log(getNomeCursos())
 // console.log(getListaAlunos())
 // console.log(getMatriculaAlunos('20151001001'))
 // console.log(getAlunosCurso('ds'))
-// console.log(getStatusAlunos('cursando'))
+// console.log(getStatusAlunos('finalizado'))
 // console.log(getSiglaMaterias('Programação Web Back End'))
 
 

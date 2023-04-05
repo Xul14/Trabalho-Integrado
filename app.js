@@ -10,6 +10,8 @@ const bodyParser = require('body-parser')
 
 //Const que recebe o documento que contém a função getNomeCursos
 const jsonDados = require('./modulo/index.js')
+const alunosJson = require('./modulo/alunos.js')
+const cursosJson = require('./modulo/cursos.js')
 
 const app = express()
 
@@ -62,10 +64,11 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
     let statusCode
     let dadosAlunos = {}
 
+    console.log(curso);
     if (status != undefined && curso == undefined) {
 
         if (status != '' || isNaN(status)) {
-            getFuncao = jsonDados.getStatusAlunos(status)
+            getFuncao = jsonDados.getStatusAlunos(status, alunosJson.alunos)
             statusCode = 200
             dadosAlunos = getFuncao
         } else {
@@ -82,6 +85,20 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
             statusCode = 404
 
         }
+    } else
+     if(curso != undefined && status != undefined){
+
+        if(isNaN(curso) && isNaN(status)){
+            let alunosCurso = jsonDados.getAlunosCurso(curso)
+            console.log(alunosCurso);
+            getFuncao = jsonDados.getStatusAlunos(status, alunosCurso.curso)
+            console.log(getFuncao);
+            statusCode = 200
+            dadosAlunos = getFuncao
+        }else{
+            statusCode = 404
+        }
+
     } else {
         getFuncao = jsonDados.getListaAlunos()
 
@@ -125,9 +142,7 @@ app.get('/v1/lion-school/alunos/:numeroMatricula', cors(), async function (reque
 
 })
 
-const port = process.env.PORT || 8080;
 
-
-app.listen(port, function () {
-    console.log(`Servidor aguardando requisições na porta ${port}`)
+app.listen(8080, function () {
+    console.log(`Servidor aguardando requisições.`)
 })
