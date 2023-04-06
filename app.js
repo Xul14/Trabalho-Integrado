@@ -64,7 +64,6 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
     let statusCode
     let dadosAlunos = {}
 
-    console.log(curso);
     if (status != undefined && curso == undefined) {
 
         if (status != '' || isNaN(status)) {

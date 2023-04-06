@@ -69,7 +69,8 @@ const getListaAlunos = (function () {
 
 // Função que retorna as siglas de cada materia
 const getSiglaMaterias = (nomeMateria) => {
-    const materia = nomeMateria.split(' ')
+    let ignorarPreposicoes = nomeMateria.replace(/\s(de|da|a|das)\s/g, ' ')
+    const materia = ignorarPreposicoes.split(' ')
     const siglaMateria = materia.map(materia => materia.charAt(0).toUpperCase());
     return siglaMateria.join('')
 }
@@ -83,17 +84,24 @@ const getMatriculaAlunos = (function (matricula) {
 
         if (aluno.matricula == matricula) {
 
-            jsonMatricula.aluno = aluno
-            aluno.curso[0].disciplinas.forEach(disciplina => {
+            jsonMatricula.foto = aluno.foto
+            jsonMatricula.nome = aluno.nome
+            jsonMatricula.matricula = aluno.matricula
+            jsonMatricula.sexo = aluno.sexo
+            jsonMatricula.curso = aluno.curso
+            jsonMatricula.status = aluno.status
+
+            aluno.curso[0].disciplinas.forEach(function (disciplina){
                 disciplina.sigla = getSiglaMaterias(disciplina.nome)
             })
+
             status = true
         }
     })
 
     if (status) {
         return jsonMatricula
-    } else {
+        } else {
         return status
     }
 
@@ -169,7 +177,7 @@ const getStatusAlunos = (function (statusAluno, jsonAlunosCurso) {
 // console.log(getMatriculaAlunos('20151001001'))
 // console.log(getAlunosCurso('ds'))
 // console.log(getStatusAlunos('finalizado'))
-// console.log(getSiglaMaterias('Programação Web Back End'))
+// console.log(getSiglaMaterias('Programação web front end'))
 
 
 module.exports = {
