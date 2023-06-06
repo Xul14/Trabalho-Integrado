@@ -21,6 +21,7 @@ const getNomeCursos = (function () {
         listaCursos.icone = curso.icone
         listaCursos.nome = curso.nome.slice(16)
         listaCursos.carga = curso.carga
+        listaCursos.descricao = curso.descricao
 
         arrayCursos.push(listaCursos)
         status = true

@@ -3,12 +3,14 @@ var cursos = [{
         "sigla": "DS",
         "icone": "https://image.shutterstock.com/image-vector/api-interface-vector-icon-600w-659203513.jpg",
         "carga": "1200",
+        "descricao": "Learn to develop web and mobile applications"
     },
     {
         "nome": "002 - Técnico em Redes de Computadores",
         "sigla": "RDS",
         "icone": "https://img.icons8.com/ultraviolet/344/thin-client.png",
-        "carga": "1200"
+        "carga": "1200",
+        "descricao": "Learn about hardware and computer networks"
     }
 ];
 
