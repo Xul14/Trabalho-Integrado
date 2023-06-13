@@ -80,13 +80,18 @@ const getSiglaMaterias = (nomeMateria) => {
 
 //Função que retorna os dados dos alunos pelo número de matrícula
 const getMatriculaAlunos = (function (matricula) {
-    let jsonMatricula = {}
+    let jsonMatriculaAluno = {}
+    let arrayMatricula = []
     let status = false
+
+    jsonMatriculaAluno.alunos = arrayMatricula
 
     alunos.alunos.forEach(aluno => {
 
         if (aluno.matricula == matricula) {
 
+            let jsonMatricula = {}
+            
             jsonMatricula.foto = aluno.foto
             jsonMatricula.nome = aluno.nome
             jsonMatricula.matricula = aluno.matricula
@@ -98,12 +103,13 @@ const getMatriculaAlunos = (function (matricula) {
                 disciplina.sigla = getSiglaMaterias(disciplina.nome)
             })
 
+            arrayMatricula.push(jsonMatricula)
             status = true
         }
     })
 
     if (status) {
-        return jsonMatricula
+        return jsonMatriculaAluno
         } else {
         return status
     }
